@@ -57,9 +57,17 @@ CnetworkingClient_SOURCES = ./src/protopeach.c \
 														./src/client/client.c \
 														./src/client/client.h \
 														./src/matchString.c \
-														./src/matchString.h
+														./src/matchString.h \
+														./src/strip.c \
+														./src/strip.h \
+														./src/client/socket.c \
+														./src/client/socket.h \
+														./src/client/help.c \
+														./src/client/help.h \
+														./src/client/matchIpv4.c \
+														./src/client/matchIpv4.h
 
-CnetworkingClient_LDADD = $(READLINE_LIBS)
+CnetworkingClient_LDADD = $(READLINE_LIBS) $(PCRE_LIBS)
 
 CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/socket.c \

@@ -60,7 +60,7 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
 
   do
   {
-    bytesRead = recv (s, tmpBuffer, bufferSize, 0);
+    bytesRead = recv (s, tmpBuffer, bufferSize, MSG_OOB);
     if (bytesRead < 0)
     {
       perror ("Erreur lors de la réception des données du client");

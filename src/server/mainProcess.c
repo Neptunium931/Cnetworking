@@ -14,11 +14,11 @@ mainProcess (int *sClient, struct fruit *fruits)
     char *rest, *token, *copyBuffer;
     memset (buffer, '\0', BUFFER_SIZE);
     receiveDataFromClient (*sClient, buffer, sizeof (buffer));
-    if (buffer[0] == 'q')
-    {
-      run = false;
-      continue;
-    }
+    // if (buffer[0] == 'q')
+    // {
+    //   run = false;
+    //   continue;
+    // }
 #define HELO_MAGIC "helo"
     copyBuffer = strdup (buffer);
     rest = copyBuffer;
