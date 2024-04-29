@@ -18,10 +18,15 @@
           in: helo helo.fr
           out: HELO NOK 90
       - test:
-          name: send fruit command not valid
+          name: send fruit command not fruit
           start: helo
           in: sendfruit
-          out: "00"
+          out: "00" # 69 ?
+      - test:
+          name: send fruit command not valid
+          start: helo
+          in: sendfruit dewfgehtr
+          out: "00" # 69 ?
       - test:
           name: send 1 peach
           start: helo
@@ -57,6 +62,11 @@
           start: helo
           in: chngfruit banana peach
           out: "chngfruit NOK 69"
+      - test:
+          name: change fruit ulair exite
+          start: helo
+          in: chngfruit peach mango
+          out: "00"
       - test:
           name: howmany not more
           start: helo

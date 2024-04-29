@@ -16,6 +16,7 @@ criterion_tests_client_CFLAGS =  $(CRITERION_CFLAGS)
 criterion_tests_client_LDFLAGS =  $(CRITERION_LIBS)
 
 criterion_tests_server_SOURCES = tests/server.c \
+																 ./tests/fff.h \
 																 ./src/server/socket.c \
 																 ./src/server/socket.h \
 																 ./src/protopeach.c \
@@ -65,6 +66,7 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/socket.h \
 														./src/protopeach.h \
 														./src/server/server.c \
+														./src/server/server.h \
 														./src/server/findFruit.c \
 														./src/server/findFruit.h \
 														./src/matchString.c \
@@ -86,6 +88,7 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/matchDomain.c \
 														./src/server/matchDomain.h \
 														./src/server/mainProcess.c \
-														./src/server/mainProcess.h
+														./src/server/mainProcess.h \
+														./src/server/state.h
 
 CnetworkingServer_LDADD = $(PCRE_LIBS) $(PTHREAD_LIBS)
