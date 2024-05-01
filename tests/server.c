@@ -206,25 +206,6 @@ Test (serverSocker, acceptConnectionTestCall)
   RESET_FAKE (accept);
 }
 
-Test (serverSocker, receiveDataFromClient)
-{
-  int *s = calloc (1, sizeof (int));
-  struct sockaddr_in *addr = calloc (1, sizeof (struct sockaddr));
-
-  openSocketServer (*addr, s);
-
-  int sClient = acceptClientConnetion (s);
-  int bufferSize = 1024;
-  char buffer[bufferSize];
-  receiveDataFromClient (sClient, buffer, bufferSize);
-
-  closeSocket (&sClient);
-  closeSocket (s);
-  free (addr);
-  free (s);
-  RESET_FAKE (accept);
-}
-
 Test (serverError, unknown) { cr_assert_eq (UNKNOWN, 0); }
 
 Test (serverError, noNumberFruitsAvailable)

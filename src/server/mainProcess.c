@@ -13,12 +13,7 @@ mainProcess (int *sClient, struct fruit *fruits)
   {
     char *rest, *token, *copyBuffer;
     memset (buffer, '\0', BUFFER_SIZE);
-    receiveDataFromClient (*sClient, buffer, sizeof (buffer));
-    // if (buffer[0] == 'q')
-    // {
-    //   run = false;
-    //   continue;
-    // }
+    receiveDataFromClient (*sClient, buffer, malloc_usable_size (buffer));
 #define HELO_MAGIC "helo"
     copyBuffer = strdup (buffer);
     rest = copyBuffer;
@@ -26,14 +21,14 @@ mainProcess (int *sClient, struct fruit *fruits)
     if (!state.helo && matchString (token, (char *)HELO_MAGIC)
         && matchDomain (rest))
     {
-      printf ("%s", buffer);
+      printf ("%s\nOK\n", buffer);
       heloResponse (sClient, OK);
       state.helo = true;
     }
     else if (state.helo && matchString (token, (char *)HELO_MAGIC)
              && matchDomain (rest))
     {
-      printf ("%s", buffer);
+      printf ("%s\nNOK\n", buffer);
       heloResponse (sClient, NOK);
       run = false;
       free (copyBuffer);
@@ -69,7 +64,7 @@ mainProcess (int *sClient, struct fruit *fruits)
     }
     else
     {
-      printf ("%s", buffer);
+      printf ("%s\n", buffer);
       heloResponse (sClient, NOK);
       run = false;
       free (copyBuffer);

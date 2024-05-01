@@ -126,5 +126,9 @@ subCount (struct fruit *fruit, int subNumber)
 void
 setNameFruit (struct fruit *fruit, char *name)
 {
-  stpcpy (fruit->name, name);
+  if (strlen (name) > malloc_usable_size (fruit->name))
+  {
+    return;
+  }
+  strcpy (fruit->name, name);
 }

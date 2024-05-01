@@ -3,15 +3,18 @@
 void
 sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
-#ifdef ENABLE_ERASE
   int diffCount;
-#endif /* ifdef ENABLE_ERASE */
   char *count, *copyBuffer, *name;
   struct fruit *fruit;
+  if (buffer == NULL)
+  {
+    unknownResponse (sClient);
+    return;
+  }
   copyBuffer = strdup (buffer);
   count = copyBuffer;
   name = strsep (&count, " ");
-  if (name == NULL || count == NULL)
+  if (name == NULL)
   {
     unknownResponse (sClient);
     free (copyBuffer);
@@ -24,12 +27,8 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
     free (copyBuffer);
     return;
   }
-#ifdef ENABLE_ERASE
   diffCount = atoi (count) - getCountFruit (fruit);
   if (!addCount (fruit, diffCount))
-#else
-  if (!addCount (fruit, atoi (count)))
-#endif /* ifdef ENABLE_ERASE */
   {
     sendFruitResponce (sClient);
   }

@@ -99,8 +99,7 @@ void
 changeFruitResponce (int *sClient, char *newName)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
-  size_t newline_pos = strcspn (newName, "\n");
-  newName[newline_pos] = '\0';
+  printf ("newName response : %s\n", newName);
   strcpy (buffer, "chngfruit OK ");
   strcat (buffer, newName);
   sendDataToClient (*sClient, buffer, strlen (buffer));

@@ -1,5 +1,6 @@
 #include "server/socket.h"
 #include <arpa/inet.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -57,26 +58,14 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
     perror ("Erreur lors de l'allocation de mémoire pour tmpBuffer");
     return;
   }
-
-  do
+  bytesRead = recv (s, tmpBuffer, bufferSize, 0);
+  if (bytesRead < 0)
   {
-    bytesRead = recv (s, tmpBuffer, bufferSize, MSG_OOB);
-    if (bytesRead < 0)
-    {
-      perror ("Erreur lors de la réception des données du client");
-      break;
-    }
-
-    strncat (buffer, tmpBuffer, bytesRead);
-
-    if (strchr (buffer, '\n') != NULL)
-    {
-      break;
-    }
-
-    memset (tmpBuffer, '\0', bufferSize);
-  } while (bytesRead > 0);
-
+    perror ("recv");
+    exit (EXIT_FAILURE);
+  }
+  strncat (buffer, tmpBuffer, bytesRead);
+  memset (tmpBuffer, '\0', bufferSize);
   free (tmpBuffer);
 }
 

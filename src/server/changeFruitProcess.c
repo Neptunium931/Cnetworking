@@ -1,5 +1,8 @@
 #include "server/changeFruitProcess.h"
+#include "matchString.h"
 #include "protopeach.h"
+#include "server/findFruit.h"
+#include <stdio.h>
 
 void
 changeFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
@@ -9,7 +12,7 @@ changeFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
   copyBuffer = strdup (buffer);
   newName = copyBuffer;
   name = strsep (&newName, " ");
-  if (name == NULL || newName == NULL)
+  if (name == NULL || newName == NULL || findFruit (newName, fruits) != NULL)
   {
     unknownResponse (sClient);
     free (copyBuffer);
@@ -23,6 +26,12 @@ changeFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
     return;
   }
   setNameFruit (fruit, newName);
+  if (!matchString (newName, getNameFruit (fruit)))
+  {
+    changeFruitResponceError (sClient, FRUITS_NOT_AVAILABLE);
+    free (copyBuffer);
+    return;
+  }
   changeFruitResponce (sClient, getNameFruit (fruit));
   free (copyBuffer);
 }

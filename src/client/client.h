@@ -2,14 +2,17 @@
 #define CLIENT_H
 
 #include <arpa/inet.h>
+#include <stdbool.h>
 #include <stdio.h>
+
+#define BUFFER_SIZE 1024
 
 struct server
 {
   int s;
   char serverIpString[15];
-  in_addr_t serverIp;
-  unsigned int port;
+  struct sockaddr_in *servAddr;
+  bool connect;
 };
 
 void initHistory (void);

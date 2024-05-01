@@ -21,12 +21,12 @@
           name: send fruit command not fruit
           start: helo
           in: sendfruit
-          out: "00" # 69 ?
+          out: "00"
       - test:
           name: send fruit command not valid
           start: helo
           in: sendfruit dewfgehtr
-          out: "00" # 69 ?
+          out: "sendfruit NOK 69"
       - test:
           name: send 1 peach
           start: helo
@@ -60,7 +60,7 @@
       - test:
           name: change fruit not available
           start: helo
-          in: chngfruit banana peach
+          in: chngfruit banana apple
           out: "chngfruit NOK 69"
       - test:
           name: change fruit ulair exite
@@ -82,19 +82,23 @@
           start: sendfruit
           in: howmany banana
           out: "howmany NOK 69"
-- scope:
-    name: server_enable_erase
-    tests:
       - test:
-          name: recvFruit enable erase
+          name: recvFruit
           start: sendfruit 
           in: recvfruit peach
           out: recvfruit OK 19
-- scope:
-    name: server_disable_erase
-    tests:
       - test:
-          name: recvFruit disable erase
-          start: sendfruit 
-          in: recvfruit peach 5
-          out: recvfruit OK 5
+          name: send too much fruits test owerflow
+          start: helo
+          in: sendfruit peach 1000000000000000000000000000000000000000000000000000000000000000000
+          out: "sendfruit NOK 51"
+      - test:
+          name: howmany not fruits owerflow
+          start: sendfruit
+          in: howmany bananafedhgflkgfljdsfkfkjlkhdkfl;wjekhl;ds'fwlj;kslv;k'flwqkejl;fsjdvcasjdfkdjfglkfdjvbflkdfjvbflkdjvbflkdfjgblkfdfjvblkfdfjvblfkgdjvbfdgkjblkfdjvbrvddfdgfdgbdgfbgdgdbngthgfnghtgfgt
+          out: "howmany NOK 69"
+      - test:
+          name: change fruit not available
+          start: helo
+          in: chngfruit peach aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          out: "chngfruit NOK 69"

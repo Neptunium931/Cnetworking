@@ -54,11 +54,6 @@ AC_ARG_WITH([enable-erase],
     [enable_erase=yes],
     [enable_erase=no])
 
-# Set custom define based on the option
-if test "x$enable_erase" = "xyes"; then
-    AC_DEFINE([ENABLE_ERASE], [1], [Enable erase sendFruit])
-fi
-
 AC_OUTPUT
 AC_MSG_RESULT([
 	$PACKAGE $VERSION
