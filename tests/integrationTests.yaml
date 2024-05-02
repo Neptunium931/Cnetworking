@@ -102,3 +102,13 @@
           start: helo
           in: chngfruit peach aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
           out: "chngfruit NOK 69"
+      - test:
+          name: send fuzzing
+          start: helo
+          in: sendfruitt peach 10
+          out: "00"
+      - test:
+          name: send fuzzing
+          start: helo
+          in: ssendfruit peach 10
+          out: "00"

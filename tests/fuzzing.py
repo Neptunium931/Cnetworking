@@ -1,10 +1,9 @@
 #!./venv/bin/python3
 import subprocess as sp
-import time
 import socket
-import yaml
-import argparse
 import sys
+import string
+import time
 from termcolor import cprint
 import difflib
 import random
@@ -33,19 +32,11 @@ def testSuccess(testName: str) -> None:
     print(f"{testName}")
 
 
-def parseArgs():
-    parser = argparse.ArgumentParser(add_help=True, description="test suite")
-    parser.add_argument(
-        "--testFile",
-        default="tests/integrationTests.yaml",
-        type=str,
-        help="path of file yaml for list of test",
-    )
-    parser.add_argument(
-        "--scope", dest="scopeList", nargs="+", help="run test for list of scope"
-    )
-
-    return parser.parse_args()
+def generate_random_string(length):
+    # Choix des caractères possibles pour la chaîne aléatoire
+    characters = string.ascii_letters + string.digits + string.punctuation
+    # Génération de la chaîne aléatoire
+    return "".join(random.choice(characters) for _ in range(length))
 
 
 def initServer() -> None:
@@ -79,59 +70,26 @@ class client:
             self.sendCommand(f"sendfruit {fruit} {random.randint(10,20)}")
 
 
-def getTest(file: str):
-    with open(file) as f:
-        data = yaml.safe_load(f)
-    return data
-
-
-def getEnableErase():
-    with open("./config.h") as f:
-        lines = f.readlines()
-    for line in lines:
-        if "#define ENABLE_ERASE 1" in line:
-            return True
-    return False
-
-
 def main():
     returnCode: int = 0
-    arg = parseArgs()
 
-    scopeList = getTest(arg.testFile)
-    enableErase = getEnableErase()
-    for scope in scopeList:
-        if enableErase and scope["scope"]["name"] == "server_disable_erase":
-            continue
-        if not enableErase and scope["scope"]["name"] == "server_enable_erase":
-            continue
-        for test in scope["scope"]["tests"]:
-            test = test["test"]
+    for _ in range(100):
+        for k in range(1, 100):
             initServer()
-
             time.sleep(0.1)
             c = client()
+            c.helo()
+            payload: str = generate_random_string(k)
+            print(f"#{payload}#")
+            out: str = c.sendCommand(payload)
             try:
-                funcStart = getattr(c, test["start"])
-                funcStart()
+                c.closeSocket()
             except:
                 continue
-            finally:
-                out: str = c.sendCommand(test["in"])
-                if out == test["out"]:
-                    testSuccess(test["name"])
-                else:
-                    testFail(test["name"], out, test["out"])
-                    returnCode = -1
-
-                try:
-                    c.closeSocket()
-                except:
-                    continue
     sys.exit(returnCode)
 
 
 if __name__ == "__main__":
-    logFile = open("integrationTests.log", "w")
+    logFile = open("fuzzing.log", "w")
     main()
     logFile.close()

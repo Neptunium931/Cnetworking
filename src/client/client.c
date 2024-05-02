@@ -17,13 +17,6 @@
 #define HISTORY_ENV_NAME "CNETWORKING_HISTORY"
 #define DEFAULT_HISTORY_FILE ".Cnetworking_history"
 
-void
-initHistory (void)
-{
-  getVarEnv ((char *)HISTORY_ENV_NAME);
-  getVarEnv ((char *)"HOME");
-}
-
 int
 main (int argc, char *argv[])
 {
@@ -31,7 +24,6 @@ main (int argc, char *argv[])
   bool run = true;
   struct server *server;
   char *buffer;
-  initHistory ();
 
   using_history ();
   read_history (DEFAULT_HISTORY_FILE);
@@ -114,15 +106,14 @@ main (int argc, char *argv[])
     else if (matchString (token, (char *)MAGIC_SEND))
     {
       memset (buffer, '\0', BUFFER_SIZE);
-      printf ("rest %s\n", rest);
       strcpy (buffer, rest);
       send (server->s, buffer, strlen (buffer), 0);
+      memset (buffer, '\0', BUFFER_SIZE);
+      recv (server->s, buffer, BUFFER_SIZE, 0);
+      printf ("%s\n", buffer);
     }
-    printf ("rest %s\n", rest);
     add_history (input);
     write_history (DEFAULT_HISTORY_FILE);
-
-    printf ("Commande saisie : #%s#\n", input);
 
     free (input);
     free (copyInput);

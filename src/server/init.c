@@ -5,7 +5,7 @@ struct fruit *
 initFruits (void)
 {
   char *name = calloc (1, sizeof (char) * LEN_FRUIT_NAME);
-  struct fruit *fruits;
+  struct fruit *fruits = NULL;
 
   strcpy (name, "peach");
   fruits = createFirstFruit (name, 0);

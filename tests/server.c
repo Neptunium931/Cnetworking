@@ -1,11 +1,9 @@
 #include "fff.h"
+#include "findFruit.h"
 #include "protopeach.h"
-#include "server/findFruit.h"
 #include "server/responce.h"
 #include "server/socket.h"
 #include <criterion/criterion.h>
-#include <criterion/internal/assert.h>
-#include <criterion/internal/test.h>
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/types.h>

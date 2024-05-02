@@ -18,6 +18,10 @@ struct fruit *
 createFirstFruit (char *fname, int fcount)
 {
   struct fruit *res = (struct fruit *)calloc (1, sizeof (struct fruit));
+  if (res == NULL)
+  {
+    puts ("null creation ");
+  }
   setNameFruit (res, fname);
   res->count = fcount;
   return res;
@@ -28,6 +32,7 @@ createFruit (char *name, int count, struct fruit *headFruit)
 {
   if (headFruit == NULL)
   {
+    perror ("createFruit headFruit is null\n");
     return;
   }
   while (headFruit->nextFuit != NULL)
@@ -80,12 +85,20 @@ delFruit (struct fruit *fruit)
 char *
 getNameFruit (struct fruit *fruit)
 {
+  if (fruit == NULL)
+  {
+    return NULL;
+  }
   return fruit->name;
 }
 
 int
 getCountFruit (struct fruit *fruit)
 {
+  if (fruit == NULL)
+  {
+    return -1;
+  }
   return fruit->count;
 }
 
@@ -98,6 +111,17 @@ struct fruit *
 getPrevFruit (struct fruit *fruit)
 {
   return fruit->prevFuit;
+}
+
+struct fruit *
+getFirstFruit (struct fruit *fruit)
+{
+  struct fruit *prevFuit = getPrevFruit (fruit);
+  if (prevFuit != NULL)
+  {
+    getFirstFruit (prevFuit);
+  }
+  return fruit;
 }
 
 int

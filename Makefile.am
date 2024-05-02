@@ -21,8 +21,8 @@ criterion_tests_server_SOURCES = tests/server.c \
 																 ./src/server/socket.h \
 																 ./src/protopeach.c \
 																 ./src/protopeach.h \
-																 ./src/server/findFruit.c \
-																 ./src/server/findFruit.h \
+																 ./src/findFruit.c \
+																 ./src/findFruit.h \
 																 ./src/matchString.c \
 																 ./src/matchString.h \
 																 ./src/server/responce.c \
@@ -65,9 +65,7 @@ CnetworkingClient_SOURCES = ./src/protopeach.c \
 														./src/client/help.c \
 														./src/client/help.h \
 														./src/client/matchIpv4.c \
-														./src/client/matchIpv4.h \
-														./src/getVarEnv.c \
-														./src/getVarEnv.h
+														./src/client/matchIpv4.h 
 
 CnetworkingClient_LDADD = $(READLINE_LIBS) $(PCRE_LIBS)
 
@@ -77,8 +75,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/protopeach.h \
 														./src/server/server.c \
 														./src/server/server.h \
-														./src/server/findFruit.c \
-														./src/server/findFruit.h \
+														./src/findFruit.c \
+														./src/findFruit.h \
 														./src/matchString.c \
 														./src/matchString.h \
 														./src/server/responce.c \
@@ -91,8 +89,8 @@ CnetworkingServer_SOURCES = ./src/protopeach.c \
 														./src/server/recvFruitProcess.h \
 														./src/server/changeFruitProcess.c \
 														./src/server/changeFruitProcess.h \
-														./src/server/clear.c \
-														./src/server/clear.h \
+														./src/clear.c \
+														./src/clear.h \
 														./src/server/howmanyProcess.c \
 														./src/server/howmanyProcess.h \
 														./src/server/matchDomain.c \

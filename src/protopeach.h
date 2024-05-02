@@ -13,6 +13,7 @@ char *getNameFruit (struct fruit *fruit);
 int getCountFruit (struct fruit *fruit);
 struct fruit *getNextFruit (struct fruit *fruit);
 struct fruit *getPrevFruit (struct fruit *fruit);
+struct fruit *getFirstFruit (struct fruit *fruit);
 
 int addCount (struct fruit *fruit, int addNumber);
 int subCount (struct fruit *fruit, int subNumber);

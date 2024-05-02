@@ -1,9 +1,13 @@
-#include "server/clear.h"
+#include "clear.h"
 #include "protopeach.h"
 
 void
 clearFruits (struct fruit *fruits)
 {
+  if (fruits == NULL)
+  {
+    return;
+  }
   struct fruit *next;
   struct fruit *prev;
   next = getNextFruit (fruits);

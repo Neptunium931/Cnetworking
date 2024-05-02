@@ -1,8 +1,10 @@
 #include "findFruit.h"
+#include "protopeach.h"
 
 struct fruit *
 findFruit (char *name, struct fruit *fruits)
 {
+  fruits = getFirstFruit (fruits);
   if (matchString (getNameFruit (fruits), name))
   {
     return fruits;

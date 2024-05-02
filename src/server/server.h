@@ -1,8 +1,8 @@
 #ifndef server_H
 #define server_H
 
+#include "clear.h"
 #include "protopeach.h"
-#include "server/clear.h"
 #include "server/init.h"
 #include "server/mainProcess.h"
 #include "server/socket.h"

@@ -1,7 +1,7 @@
 #ifndef sendFruitProcess_H
 #define sendFruitProcess_H
+#include "findFruit.h"
 #include "protopeach.h"
-#include "server/findFruit.h"
 #include "server/responce.h"
 #include <string.h>
 

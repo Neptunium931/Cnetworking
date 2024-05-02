@@ -16,6 +16,4 @@ struct server
   bool connect;
 };
 
-void initHistory (void);
-
 #endif /* end of include guard: CLIENT_H */
