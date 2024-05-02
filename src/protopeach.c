@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int maxFruit = 20;
+static int maxFruit = FRUITMAX;
+
 struct fruit
 {
-  char name[20];
+  char name[LEN_FRUIT_NAME];
   int count;
   struct fruit *nextFuit;
   struct fruit *prevFuit;
@@ -38,42 +39,42 @@ createFruit (char *name, int count, struct fruit *headFruit)
 }
 
 void
-delFruit (struct fruit *f)
+delFruit (struct fruit *fruit)
 {
-  if (f->prevFuit != NULL)
+  if (fruit->prevFuit != NULL)
   {
     // reassign the nextFuit value of the previous fruit if there is a fruit
     // after
-    if (f->prevFuit->nextFuit != NULL)
+    if (fruit->prevFuit->nextFuit != NULL)
     {
-      f->prevFuit->nextFuit = f->nextFuit;
+      fruit->prevFuit->nextFuit = fruit->nextFuit;
     }
   }
   else
   {
-    if (f->nextFuit != NULL)
+    if (fruit->nextFuit != NULL)
     {
-      f->nextFuit->prevFuit = NULL;
+      fruit->nextFuit->prevFuit = NULL;
     }
   }
 
-  if (f->nextFuit != NULL)
+  if (fruit->nextFuit != NULL)
   {
     // reassign the prevFuit value of the following fruit if there is a
     // previous fruit
-    if (f->nextFuit->prevFuit != NULL)
+    if (fruit->nextFuit->prevFuit != NULL)
     {
-      f->nextFuit->prevFuit = f->prevFuit;
+      fruit->nextFuit->prevFuit = fruit->prevFuit;
     }
   }
   else
   {
-    if (f->prevFuit != NULL)
+    if (fruit->prevFuit != NULL)
     {
-      f->prevFuit->nextFuit = NULL;
+      fruit->prevFuit->nextFuit = NULL;
     }
   }
-  free (f);
+  free (fruit);
 }
 
 char *
@@ -103,7 +104,7 @@ int
 addCount (struct fruit *fruit, int addNumber)
 {
   fruit->count += addNumber;
-  if (fruit->count > maxFruit)
+  if (fruit->count > maxFruit || addNumber < 0)
   {
     fruit->count -= addNumber;
     return -1;

@@ -1,10 +1,14 @@
 #include "server/sendFuitProcess.h"
+#include "protopeach.h"
+#include <stdio.h>
 
 void
 sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
   int diffCount;
-  char *count, *copyBuffer, *name;
+  char *count;
+  char *copyBuffer;
+  char *name;
   struct fruit *fruit;
   if (buffer == NULL)
   {
@@ -28,7 +32,9 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
     return;
   }
   diffCount = atoi (count) - getCountFruit (fruit);
-  if (!addCount (fruit, diffCount))
+  printf ("count %d\n", atoi (count));
+  printf ("diffCount %d\n", diffCount);
+  if (atoi (count) > 0 && !addCount (fruit, diffCount))
   {
     sendFruitResponce (sClient);
   }
@@ -36,5 +42,6 @@ sendFuitProcess (int *sClient, char *buffer, struct fruit *fruits)
   {
     sendFruitResponceError (sClient, TOO_MUCH_FRUITS);
   }
+  printf ("get count %d\n", getCountFruit (fruit));
   free (copyBuffer);
 }

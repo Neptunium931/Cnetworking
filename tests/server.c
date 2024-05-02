@@ -67,6 +67,14 @@ Test (fruitGestion, addCountNull)
 
   delFruit (f);
 }
+Test (fruitGestion, addCountNegative)
+{
+  struct fruit *f = createFirstFruit (fname, 4);
+  addCount (f, -1);
+  cr_assert_eq (getCountFruit (f), 4);
+
+  delFruit (f);
+}
 
 Test (fruitGestion, subCount)
 {

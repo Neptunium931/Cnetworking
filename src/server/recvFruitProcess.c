@@ -5,7 +5,9 @@
 void
 recvFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
-  char *charCount, *copyBuffer, *name;
+  char *charCount;
+  char *copyBuffer;
+  char *name;
   struct fruit *fruit;
   int count;
   size_t line_pos;

@@ -1,6 +1,8 @@
 #ifndef protopeach_H
 #define protopeach_H
 
+#define FRUITMAX 20
+#define LEN_FRUIT_NAME 20
 struct fruit;
 
 struct fruit *createFirstFruit (char *name, int count);

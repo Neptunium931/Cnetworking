@@ -2,6 +2,7 @@
 #include "client/help.h"
 #include "client/matchIpv4.h"
 #include "client/socket.h"
+#include "getVarEnv.h"
 #include "matchString.h"
 #include "strip.h"
 #include <netinet/in.h>
@@ -12,7 +13,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
-#include <unistd.h>
 
 #define HISTORY_ENV_NAME "CNETWORKING_HISTORY"
 #define DEFAULT_HISTORY_FILE ".Cnetworking_history"
@@ -22,32 +22,6 @@ initHistory (void)
 {
   getVarEnv ((char *)HISTORY_ENV_NAME);
   getVarEnv ((char *)"HOME");
-}
-
-char *
-getVarEnv (char *name)
-{
-  char **env_ptr = environ;
-  char *varName, *value, *copyEnv;
-
-  while (*env_ptr != NULL)
-  {
-    copyEnv = strdup (*env_ptr);
-    value = copyEnv;
-    varName = strsep (&value, "=");
-    if (varName == NULL || value == NULL)
-    {
-      free (copyEnv);
-      continue;
-    }
-    if (matchString (varName, name))
-    {
-      printf ("%s\n", *env_ptr);
-    }
-    env_ptr++;
-    free (copyEnv);
-  }
-  return NULL;
 }
 
 int
@@ -67,7 +41,9 @@ main (int argc, char *argv[])
   buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   while (run == true)
   {
-    char *rest, *token, *copyInput;
+    char *rest;
+    char *token;
+    char *copyInput;
     input = readline (">> ");
     if (input == NULL || matchString (input, (char *)"exit"))
     {
@@ -76,7 +52,7 @@ main (int argc, char *argv[])
       free (input);
       continue;
     }
-    else if (strlen (input) == 0)
+    if (strlen (input) == 0)
     {
       free (input);
       continue;

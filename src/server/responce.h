@@ -29,14 +29,14 @@ enum response
   OK = 1,
 };
 
-void heloResponse (int *sClient, enum response heloResponseChoise);
-void unknownResponse (int *sClient);
-void sendFruitResponceError (int *sClient, enum Errorcodes errorCode);
-void sendFruitResponce (int *sClient);
-void recvFruitResponceError (int *sClient, enum Errorcodes errorCode);
-void recvFruitResponce (int *sClient, int numberFruit);
-void changeFruitResponceError (int *sClient, enum Errorcodes errorCode);
-void changeFruitResponce (int *sClient, char *newName);
-void howmanyResponceError (int *sClient, enum Errorcodes errorCode);
-void howmanyResponce (int *sClient, int count);
+void heloResponse (const int *sClient, enum response heloResponseChoise);
+void unknownResponse (const int *sClient);
+void sendFruitResponceError (const int *sClient, enum Errorcodes errorCode);
+void sendFruitResponce (const int *sClient);
+void recvFruitResponceError (const int *sClient, enum Errorcodes errorCode);
+void recvFruitResponce (const int *sClient, int numberFruit);
+void changeFruitResponceError (const int *sClient, enum Errorcodes errorCode);
+void changeFruitResponce (const int *sClient, char *newName);
+void howmanyResponceError (const int *sClient, enum Errorcodes errorCode);
+void howmanyResponce (const int *sClient, int count);
 #endif /* end of include guard: responce_H */

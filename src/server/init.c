@@ -1,9 +1,10 @@
 #include "server/init.h"
+#include "protopeach.h"
 
 struct fruit *
 initFruits (void)
 {
-  char *name = calloc (1, sizeof (char) * 20);
+  char *name = calloc (1, sizeof (char) * LEN_FRUIT_NAME);
   struct fruit *fruits;
 
   strcpy (name, "peach");

@@ -4,7 +4,8 @@
 void
 clearFruits (struct fruit *fruits)
 {
-  struct fruit *next, *prev;
+  struct fruit *next;
+  struct fruit *prev;
   next = getNextFruit (fruits);
   while (next != NULL)
   {

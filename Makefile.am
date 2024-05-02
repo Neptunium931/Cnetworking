@@ -65,7 +65,9 @@ CnetworkingClient_SOURCES = ./src/protopeach.c \
 														./src/client/help.c \
 														./src/client/help.h \
 														./src/client/matchIpv4.c \
-														./src/client/matchIpv4.h
+														./src/client/matchIpv4.h \
+														./src/getVarEnv.c \
+														./src/getVarEnv.h
 
 CnetworkingClient_LDADD = $(READLINE_LIBS) $(PCRE_LIBS)
 

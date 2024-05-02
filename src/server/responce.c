@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void
-heloResponse (int *sClient, enum response heloResponseChoise)
+heloResponse (const int *sClient, enum response heloResponseChoise)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCode = malloc (sizeof (char) * 3);
@@ -27,7 +27,7 @@ heloResponse (int *sClient, enum response heloResponseChoise)
 }
 
 void
-unknownResponse (int *sClient)
+unknownResponse (const int *sClient)
 {
   char *buffer = calloc (1, sizeof (char) * 3);
   sprintf (buffer, "%02d", UNKNOWN);
@@ -36,7 +36,7 @@ unknownResponse (int *sClient)
 }
 
 void
-sendFruitResponceError (int *sClient, enum Errorcodes errorCode)
+sendFruitResponceError (const int *sClient, enum Errorcodes errorCode)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCodeBuffer = malloc (sizeof (char) * 3);
@@ -48,7 +48,7 @@ sendFruitResponceError (int *sClient, enum Errorcodes errorCode)
   free (errorCodeBuffer);
 }
 void
-sendFruitResponce (int *sClient)
+sendFruitResponce (const int *sClient)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   strcpy (buffer, "sendfruit");
@@ -58,7 +58,7 @@ sendFruitResponce (int *sClient)
 }
 
 void
-recvFruitResponceError (int *sClient, enum Errorcodes errorCode)
+recvFruitResponceError (const int *sClient, enum Errorcodes errorCode)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCodeBuffer = malloc (sizeof (char) * 3);
@@ -70,7 +70,7 @@ recvFruitResponceError (int *sClient, enum Errorcodes errorCode)
   free (errorCodeBuffer);
 }
 void
-recvFruitResponce (int *sClient, int numberFruit)
+recvFruitResponce (const int *sClient, int numberFruit)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *numberBuffer = malloc (sizeof (char) * 3);
@@ -84,7 +84,7 @@ recvFruitResponce (int *sClient, int numberFruit)
 }
 
 void
-changeFruitResponceError (int *sClient, enum Errorcodes errorCode)
+changeFruitResponceError (const int *sClient, enum Errorcodes errorCode)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCodeBuffer = malloc (sizeof (char) * 3);
@@ -96,7 +96,7 @@ changeFruitResponceError (int *sClient, enum Errorcodes errorCode)
   free (errorCodeBuffer);
 }
 void
-changeFruitResponce (int *sClient, char *newName)
+changeFruitResponce (const int *sClient, char *newName)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   printf ("newName response : %s\n", newName);
@@ -107,7 +107,7 @@ changeFruitResponce (int *sClient, char *newName)
 }
 
 void
-howmanyResponceError (int *sClient, enum Errorcodes errorCode)
+howmanyResponceError (const int *sClient, enum Errorcodes errorCode)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *errorCodeBuffer = malloc (sizeof (char) * 3);
@@ -119,7 +119,7 @@ howmanyResponceError (int *sClient, enum Errorcodes errorCode)
   free (errorCodeBuffer);
 }
 void
-howmanyResponce (int *sClient, int count)
+howmanyResponce (const int *sClient, int count)
 {
   char *buffer = calloc (1, sizeof (char) * BUFFER_SIZE);
   char *numberBuffer = malloc (sizeof (char) * 3);

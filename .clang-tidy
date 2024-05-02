@@ -1,0 +1,4 @@
+Checks: '-*,readability-*,performance-*,readability-unused-include'
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
+FormatStyle: none

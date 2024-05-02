@@ -11,17 +11,16 @@
 void
 openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
 {
-  int opt;
   *sockfd = socket (AF_INET, SOCK_STREAM, 0);
   if (*sockfd < 0)
   {
     perror ("impossible d'ouvrir le socket\n");
     exit (-1);
   }
-  opt = 1;
+  int socketOpt = 1;
   // Permettre la réutilisation de l'adresse du socket
-  if (setsockopt (*sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt,
-                  sizeof (opt)))
+  if (setsockopt (*sockfd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &socketOpt,
+                  sizeof (socketOpt)))
   {
     perror ("setsockopt");
     exit (-1);
@@ -36,19 +35,19 @@ openSocketServer (struct sockaddr_in serv_addr, int *sockfd)
 }
 
 void
-closeSocket (int *sockfd)
+closeSocket (const int *sockfd)
 {
   close (*sockfd);
 }
 
 int
-acceptClientConnetion (int *sockfd)
+acceptClientConnetion (const int *sockfd)
 {
   return accept (*sockfd, NULL, NULL);
 }
 
 void
-receiveDataFromClient (int s, char *buffer, int bufferSize)
+receiveDataFromClient (int socket, char *buffer, int bufferSize)
 {
   ssize_t bytesRead;
   char *tmpBuffer = calloc (1, sizeof (char) * bufferSize);
@@ -58,7 +57,7 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
     perror ("Erreur lors de l'allocation de mémoire pour tmpBuffer");
     return;
   }
-  bytesRead = recv (s, tmpBuffer, bufferSize, 0);
+  bytesRead = recv (socket, tmpBuffer, bufferSize, 0);
   if (bytesRead < 0)
   {
     perror ("recv");
@@ -70,14 +69,14 @@ receiveDataFromClient (int s, char *buffer, int bufferSize)
 }
 
 void
-sendDataToClient (int s, const char *buffer, int bufferSize)
+sendDataToClient (int socket, const char *buffer, int bufferSize)
 {
   ssize_t totalSent = 0;
   ssize_t bytesSent;
 
   while (totalSent < bufferSize)
   {
-    bytesSent = send (s, buffer + totalSent, bufferSize - totalSent, 0);
+    bytesSent = send (socket, buffer + totalSent, bufferSize - totalSent, 0);
     if (bytesSent == -1)
     {
       perror ("Erreur lors de l'envoi des données");

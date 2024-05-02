@@ -7,15 +7,15 @@
 
 #define BUFFER_SIZE 1024
 
+#define LEN_IP_STRING 15
 struct server
 {
   int s;
-  char serverIpString[15];
+  char serverIpString[LEN_IP_STRING];
   struct sockaddr_in *servAddr;
   bool connect;
 };
 
 void initHistory (void);
-char *getVarEnv (char *name);
 
 #endif /* end of include guard: CLIENT_H */

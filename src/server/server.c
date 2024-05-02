@@ -3,20 +3,21 @@
 int
 main (int argc, char *argv[])
 {
-  int *s, *sClient;
+  int *socket;
+  int *sClient;
   struct sockaddr_in servAddr;
   struct fruit *fruits;
   servAddr.sin_family = AF_INET;
   servAddr.sin_port = htons (9001);
   servAddr.sin_addr.s_addr = INADDR_ANY;
 
-  s = malloc (sizeof (int));
-  openSocketServer (servAddr, s);
+  socket = malloc (sizeof (int));
+  openSocketServer (servAddr, socket);
 
   fruits = initFruits ();
 
   sClient = malloc (sizeof (int));
-  *sClient = acceptClientConnetion (s);
+  *sClient = acceptClientConnetion (socket);
 
   mainProcess (sClient, fruits);
 
@@ -24,7 +25,7 @@ main (int argc, char *argv[])
   close (*sClient);
   free (sClient);
 
-  close (*s);
-  free (s);
+  close (*socket);
+  free (socket);
   return 0;
 }

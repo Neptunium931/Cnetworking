@@ -21,7 +21,7 @@ AC_USE_SYSTEM_EXTENSIONS
 
 AX_COMPILER_FLAGS
 AX_CHECK_COMPILE_FLAG([-fsanitize=address], [ASAN_FLAG="-fsanitize=address"])
-CFLAGS="$CFLAGS -std=c99 ${ASAN_FLAG}"
+CFLAGS="$CFLAGS -std=c99 ${ASAN_FLAG} -Wno-declaration-after-statement"
 
 AM_SILENT_RULES([yes])
 
@@ -47,12 +47,6 @@ AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_FILES([Makefile])
 
 AC_REQUIRE_AUX_FILE([tap-driver.sh])
-
-AC_ARG_WITH([enable-erase],
-    AS_HELP_STRING([--with-enable-erase],
-                   [Enable erase sendFruit]),
-    [enable_erase=yes],
-    [enable_erase=no])
 
 AC_OUTPUT
 AC_MSG_RESULT([

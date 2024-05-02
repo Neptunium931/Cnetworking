@@ -11,7 +11,9 @@ mainProcess (int *sClient, struct fruit *fruits)
   state.helo = false;
   while (run)
   {
-    char *rest, *token, *copyBuffer;
+    char *rest;
+    char *token;
+    char *copyBuffer;
     memset (buffer, '\0', BUFFER_SIZE);
     receiveDataFromClient (*sClient, buffer, malloc_usable_size (buffer));
 #define HELO_MAGIC "helo"

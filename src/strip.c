@@ -1,4 +1,5 @@
 #include "strip.h"
+#include <string.h>
 
 void
 strip (char *string)
@@ -9,5 +10,4 @@ strip (char *string)
     string[lenString] = '\0';
     strip (string);
   }
-  return;
 }

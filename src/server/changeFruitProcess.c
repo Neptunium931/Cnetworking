@@ -7,7 +7,9 @@
 void
 changeFruitProcess (int *sClient, char *buffer, struct fruit *fruits)
 {
-  char *newName, *copyBuffer, *name;
+  char *newName;
+  char *copyBuffer;
+  char *name;
   struct fruit *fruit;
   copyBuffer = strdup (buffer);
   newName = copyBuffer;
